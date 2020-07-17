@@ -109,7 +109,7 @@ class UserController extends Controller
         if($session==""){
             die('请登录');
         }else{
-            echo "欢迎".$session['name']."登录";
+            echo "欢迎".$session['user_name']."登录";
         }
     }
 
