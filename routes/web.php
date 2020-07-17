@@ -22,3 +22,4 @@ Route::get('/user/login','User\UserController@login');
 Route::get('/user/reg','User\UserController@reg');
 Route::post('/user/regdo','User\UserController@regdo');
 Route::post('/user/logindo','User\UserController@logindo');
+Route::get('/user/create','User\UserController@create');

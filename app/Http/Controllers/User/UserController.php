@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\User;
+use Illuminate\Support\Facades\Redis;
 class UserController extends Controller
 {
 
@@ -30,6 +31,12 @@ class UserController extends Controller
                 if(md5($password) != $ret->password){
                     echo "<script>alert('密码不正确...');location.href='/user/login'</script>";
                 }else{
+//                    session(['uid'=>$ret->user_id]);
+                    $data=[
+                        'user_name'=>$user_name,
+                        'time'=>time()
+                    ];
+                    session(['userinfo'=>$data]);
                     echo "<script>alert('登录成功...');location.href='/user/create'</script>";
                 }
             }else{
@@ -95,11 +102,15 @@ class UserController extends Controller
             }else{
                 echo "<script>alert('注册失败...');location.href='/user/reg'</script>";
             }
-
-
-
-
-
-
         }
+
+    public function create(){
+        $session=session('userinfo');
+        if($session==""){
+            die('请登录');
+        }else{
+            echo "欢迎".$session['name']."登录";
+        }
+    }
+
 }
